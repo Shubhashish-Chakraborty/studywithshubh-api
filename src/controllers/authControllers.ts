@@ -49,13 +49,13 @@ export const login = async (req: Request, res: Response) => {
 
         const user = await UserModel.findOne({ email });
         if (!user) {
-            res.status(400).json({ message: 'Invalid credentials' });
+            res.status(400).json({ message: 'Incorrect credentials' });
             return
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            res.status(400).json({ message: 'Invalid credentials' });
+            res.status(400).json({ message: 'Incorrect credentials' });
             return;
         }
 
