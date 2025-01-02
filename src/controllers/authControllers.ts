@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { UserModel } from '../models/User';
 
 import { Request, Response } from "express";
+import { JWT_USER_SECRET } from '../config';
 
 // Signup Schema || INPUT VALIDATION
 const signupSchema = z.object({
@@ -59,8 +60,9 @@ export const login = async (req: Request, res: Response) => {
             return;
         }
 
-        const token = jwt.sign({ id: user._id }, 'secret_key', { expiresIn: '1h' });
-        res.status(200).json({ token });
+        const token = jwt.sign({ id: user._id }, JWT_USER_SECRET , { expiresIn: '1h' });
+        
+        res.status(200).json({ token , courses: user.courses });
     } catch (err: any) {
         res.status(500).json({ message: err.message });
     }
