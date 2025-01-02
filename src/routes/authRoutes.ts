@@ -5,3 +5,4 @@ export const swsRouter = Router();
 
 swsRouter.route('/signup').post(signup);
 swsRouter.route('/login').post(login);
+swsRouter.route('/courses/:courseName').get(login);
