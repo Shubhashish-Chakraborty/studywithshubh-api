@@ -3,14 +3,14 @@ import mongoose from 'mongoose';
 import cors from "cors";
 
 import { PORT, MONGO_URL } from './config';
-import { swsRouter } from './routes/authRoutes';
+import { swsRouter } from './routes/SwsRoutes';
 
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/auth', swsRouter);
+app.use('/api', swsRouter);
 
 app.get('/' , (req , res) => {
     res.send(`StudyWithShubh Server is Live! <br/> <a href="https://studywithshubh.tech">Visit the Website!</a>`)
