@@ -10,13 +10,13 @@ import { JWT_USER_SECRET } from '../config';
 const signupSchema = z.object({
     username: z.string().min(3),
     email: z.string().email(),
-    password: z.string().min(6),
+    password: z.string().min(3),
 });
 
 // Login Schema
 const loginSchema = z.object({
     email: z.string().email(),
-    password: z.string().min(6),
+    password: z.string().min(3),
 });
 
 // User Signup
