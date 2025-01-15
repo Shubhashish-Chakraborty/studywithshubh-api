@@ -50,8 +50,8 @@ export const updateCourse = async (req: Request, res: Response) => {
     try {
         const { title, newLecture } = req.body;
 
-        if (!title || !newLecture) {
-            res.status(400).json({ message: "Course title and new lecture data are required." });
+        if (!title || !newLecture || !newLecture.title || !newLecture.videoUrl || !newLecture.notesPdf) {
+            res.status(400).json({ message: "Course title and complete new lecture data are required." });
             return
         }
 
