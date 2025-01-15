@@ -45,3 +45,33 @@ export const getCourse = async (req: Request, res: Response) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+export const updateCourse = async (req: Request, res: Response) => {
+    try {
+        const { title, newLecture } = req.body;
+
+        if (!title || !newLecture) {
+            res.status(400).json({ message: "Course title and new lecture data are required." });
+            return
+        }
+
+        const updatedCourse = await CourseModel.findOneAndUpdate(
+            { title },
+            { $push: { lectures: newLecture } },
+            { new: true }
+        );
+
+        if (!updatedCourse) {
+            res.status(404).json({ message: "Course not found." });
+            return
+        }
+
+        res.status(200).json({
+            message: "Lecture added successfully.",
+            course: updatedCourse
+        });
+    } catch (err) {
+        console.error("Error updating course:", err);
+        res.status(500).json({ message: "Failed to update course." });
+    }
+};
