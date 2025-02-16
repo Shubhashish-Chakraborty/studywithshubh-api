@@ -7,7 +7,7 @@ export const swsRouter = Router();
 
 swsRouter.route('/signup').post(signup);
 swsRouter.route('/login').post(login);
-swsRouter.route('/login/admin').post(adminLogin);
+swsRouter.route('/login/admin').post(authenticate , adminLogin);
 swsRouter.route('/courses').post(authenticate , addCourse);
 swsRouter.route('/courses/update').patch(authenticate , updateCourse);
 swsRouter.route('/courses/:courseName').get(authenticate , getCourse);
